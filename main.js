@@ -37,9 +37,9 @@ function aotuCanvas(canvas){
 function listenToMouse(canvas){
   var using = false;
   var lastPoint={x:undefined, y:undefined};
-  canvas.onmousedown = function(aaa){
-    var x = aaa.clientX;
-    var y = aaa.clientY;
+  canvas.onmousedown = function(down){
+    var x = down.clientX;
+    var y = down.clientY;
     using = true;
     if(usingEraser){
       context.clearRect(x-5,y-5,50,50);
@@ -49,24 +49,23 @@ function listenToMouse(canvas){
       drawCircle(x,y,3);
     }
 }
-canvas.onmousemove = function(aaa){
-   var x = aaa.clientX;
-   var y = aaa.clientY;
+canvas.onmousemove = function(move){
+   var x = move.clientX;
+   var y = move.clientY;
   if(!using){return;}
    if(usingEraser){
         context.clearRect(x,y,10,10);
    }else{
        var newPoint = {x:x, y:y};
-       drawLine(lastPoint.x, lastPoint.y, newPoint.x,                newPoint.y);
+       drawLine(lastPoint.x, lastPoint.y, newPoint.x, newPoint.y);
        lastPoint = newPoint;
        console.log(lastPoint);
   }
 }
 
 
-canvas.onmouseup = function(aaa){
+canvas.onmouseup = function(up){
   using = false;
-//   usingEraser = false;
 }
 
 }
