@@ -7,16 +7,53 @@ listenToUser(canvas);
 
 
 var usingEraser = false;
+pen.onclick = function(){
+  usingEraser = false;
+  pen.classList.add('active');
+  eraser.classList.remove('active');
+}
 eraser.onclick = function(){
   usingEraser = true;
-  actions.className = "actions x";
+  eraser.classList.add('active');
+  pen.classList.remove('active');
+  black.classList.remove('active');
+  red.classList.remove('active');
+  green.classList.remove('active');
+  blue.classList.remove('active');
 }
 
-brush.onclick = function(){
-  usingEraser = false;
-  actions.className = "actions";
+black.onclick = function(){
+  context.strokeStyle = 'black';
+  context.fillStyle = 'black';
+  black.classList.add('active');
+  red.classList.remove('active');
+  green.classList.remove('active');
+  blue.classList.remove('active');
 }
-
+red.onclick = function(){
+  context.strokeStyle = 'red';
+  context.fillStyle = 'red';
+  red.classList.add('active');
+  black.classList.remove('active');
+  green.classList.remove('active');
+  blue.classList.remove('active');
+}
+green.onclick = function(){
+  context.strokeStyle = 'green';
+  context.fillStyle = 'green';  
+  green.classList.add('active');  
+  black.classList.remove('active');
+  red.classList.remove('active');
+  blue.classList.remove('active');
+}
+blue.onclick = function(){
+  context.strokeStyle = 'blue';
+  context.fillStyle = 'blue';  
+  blue.classList.add('active');  
+  black.classList.remove('active');
+  red.classList.remove('active');
+  green.classList.remove('active');
+}
 
 /************/
 
@@ -80,7 +117,7 @@ function listenToUser(canvas){
       var y = down.clientY;
       using = true;
       if(usingEraser){
-        context.clearRect(x-5,y-5,50,50);
+        context.clearRect(x-25,y-25,50,50);
       }else{
         lastPoint = {"x":x, "y":y};
         // console.log(lastPoint);
@@ -92,7 +129,7 @@ function listenToUser(canvas){
      var y = move.clientY;
     if(!using){return;}
      if(usingEraser){
-          context.clearRect(x,y,10,10);
+          context.clearRect(x-25,y-25,50,50);
      }else{
          var newPoint = {x:x, y:y};
          drawLine(lastPoint.x, lastPoint.y, newPoint.x, newPoint.y);
@@ -112,7 +149,6 @@ function listenToUser(canvas){
 
 function drawCircle(x,y,radius){
   context.beginPath();
-  context.fillStyle = 'black';
   context.arc(x,y,radius,0,Math.PI*2);
   context.fill();
 }
@@ -120,7 +156,6 @@ function drawCircle(x,y,radius){
 
 function drawLine(x1,y1,x2,y2){
   context.beginPath();
-  context.strokeStyle = 'black';
   context.moveTo(x1,y1);//起点
   context.lineTo(x2,y2);//终点
   context.lineWidth = 5;

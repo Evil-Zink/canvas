@@ -5,42 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <style>
-        #canvas{
-            background: green;
-            display: block;
-        }
-        body{
-            margin: 0;
-            padding: 0;
-        }
-        html{
-            margin: 0;
-            padding: 0;
-        }
-        .actions{
-            position: fixed;
-            bottom: 0;
-            left: 0;
-        }
-        .actions>#brush{
-            display:none;
-        }
-        .actions.x>#brush{
-            display:inline-block;
-        }
-        .actions.x>#eraser{
-            display:none;
-        }
-    </style>
+    <link rel="stylesheet" href="./style.css">
     
 </head>
 <body>
     <canvas id="canvas" wigth=300 height=300></canvas>
     <div class="actions" id="actions">
-        <button id="eraser">橡皮擦</button>
-        <button id="brush">画笔</button>
+        <svg class="active icon" aria-hidden="true" id="pen">
+            <use xlink:href="#icon-pan_icon"></use>
+        </svg>
+        <svg class="icon" aria-hidden="true" id="eraser">
+            <use xlink:href="#icon-eraser"></use>
+        </svg>
+        <!-- <button id="eraser">橡皮擦</button>
+        <button id="brush">画笔</button> -->
     </div>
+    <ol class="colors">
+        <li class="black active" id="black"></li>
+        <li class="red" id="red"></li>
+        <li class="green" id="green"></li>
+        <li class="blue" id="blue"></li>
+    </ol>
     <script src="./main.js"></script>
+    <script src="//at.alicdn.com/t/font_615507_mox2rngd312x1or.js"></script>    
 </body>
 </html>
