@@ -1,6 +1,3 @@
-// document.body.ontouchstart = function(x){
-//   x.preventDefault();
-// }
 var canvas = document.getElementById('canvas');
 var context = canvas.getContext('2d');
 var lineWidth = 5;
@@ -8,7 +5,6 @@ var lineWidth = 5;
 aotuCanvas(canvas);
 
 listenToUser(canvas);
-
 
 var usingEraser = false;
 pen.onclick = function(){
@@ -128,8 +124,7 @@ function listenToUser(canvas){
          var newPoint = {x:x, y:y};
          drawLine(lastPoint.x, lastPoint.y, newPoint.x, newPoint.y);
          lastPoint = newPoint;
-        //  console.log(lastPoint);
-    }
+      }
     }
     canvas.ontouchend = function(){
       console.log('离开');
@@ -145,30 +140,26 @@ function listenToUser(canvas){
         context.clearRect(x-25,y-25,50,50);
       }else{
         lastPoint = {"x":x, "y":y};
-        // console.log(lastPoint);
       }
-  }
-  canvas.onmousemove = function(move){
-    var x = move.clientX;
-     var y = move.clientY;
-    if(!using){return;}
-     if(usingEraser){
+    }
+    canvas.onmousemove = function(move){
+      var x = move.clientX;
+      var y = move.clientY;
+      if(!using){return;}
+      if(usingEraser){
           context.clearRect(x-25,y-25,50,50);
-     }else{
+      }else{
          var newPoint = {x:x, y:y};
          drawLine(lastPoint.x, lastPoint.y, newPoint.x, newPoint.y);
          lastPoint = newPoint;
-        //  console.log(lastPoint);
+      }
+    }
+  
+  
+    canvas.onmouseup = function(up){
+      using = false;
     }
   }
-  
-  
-  canvas.onmouseup = function(up){
-    using = false;
-  }
-  }
-  
-
 }
 
 function drawCircle(x,y,radius){
