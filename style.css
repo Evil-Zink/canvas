@@ -74,6 +74,11 @@ body{
     width: 20px;
     border-top: 3px solid black;
 }
+.sizes > .medium{
+    height: 0;
+    width: 20px;
+    border-top: 5px solid black;
+}
 .sizes > .thick{
     height: 0;
     width: 20px;

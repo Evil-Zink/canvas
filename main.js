@@ -73,6 +73,9 @@ blue.onclick = function(){
 thin.onclick = function(){
   lineWidth = 3;
 }
+medium.onclick = function(){
+  lineWidth = 5;
+}
 thick.onclick = function(){
   lineWidth = 7;
 }
