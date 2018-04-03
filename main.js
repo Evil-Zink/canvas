@@ -1,5 +1,9 @@
+// document.body.ontouchstart = function(x){
+//   x.preventDefault();
+// }
 var canvas = document.getElementById('canvas');
 var context = canvas.getContext('2d');
+var lineWidth = 5;
 
 aotuCanvas(canvas);
 
@@ -11,6 +15,9 @@ pen.onclick = function(){
   usingEraser = false;
   pen.classList.add('active');
   eraser.classList.remove('active');
+  context.strokeStyle = 'black';
+  context.fillStyle = 'black';
+  black.classList.add('active');
 }
 eraser.onclick = function(){
   usingEraser = true;
@@ -20,6 +27,18 @@ eraser.onclick = function(){
   red.classList.remove('active');
   green.classList.remove('active');
   blue.classList.remove('active');
+}
+clear.onclick = function(){
+  context.clearRect(0, 0, canvas.width, canvas.height)
+}
+save.onclick = function(){
+  var url = canvas.toDataURL('image/png');
+  var a  = document.createElement('a');
+  document.body.appendChild(a);
+  a.href = url;
+  a.download = '我的绘画';
+  a.target = '_blank';
+  a.click();
 }
 
 black.onclick = function(){
@@ -55,7 +74,16 @@ blue.onclick = function(){
   green.classList.remove('active');
 }
 
+thin.onclick = function(){
+  lineWidth = 3;
+}
+thick.onclick = function(){
+  lineWidth = 7;
+}
+
 /************/
+context.fillStyle = 'white';
+context.fillRect(0,0,canvas.width, canvas.height);
 
 function aotuCanvas(canvas){
   changeWH();
@@ -79,17 +107,14 @@ function listenToUser(canvas){
   if(document.body.ontouchstart !== undefined){
     //触屏设备
     canvas.ontouchstart = function(down){
-      console.log(down)
-      console.log('触摸');
       var x = down.touches[0].clientX;
       var y = down.touches[0].clientY;
       using = true;
       if(usingEraser){
-        context.clearRect(x-5,y-5,50,50);
+        context.clearRect(x-25,y-25,50,50);
       }else{
         lastPoint = {"x":x, "y":y};
         console.log(lastPoint);
-        drawCircle(x,y,3);
       }
     }
     canvas.ontouchmove = function(move){
@@ -98,7 +123,7 @@ function listenToUser(canvas){
       var y = move.touches[0].clientY;
       if(!using){return;}
       if(usingEraser){
-          context.clearRect(x,y,10,10);
+          context.clearRect(x-25,y-25,50,50);
       }else{
          var newPoint = {x:x, y:y};
          drawLine(lastPoint.x, lastPoint.y, newPoint.x, newPoint.y);
@@ -121,7 +146,6 @@ function listenToUser(canvas){
       }else{
         lastPoint = {"x":x, "y":y};
         // console.log(lastPoint);
-        drawCircle(x,y,3);
       }
   }
   canvas.onmousemove = function(move){
@@ -158,7 +182,7 @@ function drawLine(x1,y1,x2,y2){
   context.beginPath();
   context.moveTo(x1,y1);//起点
   context.lineTo(x2,y2);//终点
-  context.lineWidth = 5;
+  context.lineWidth = lineWidth;
   context.stroke();
   context.closePath();
 }
