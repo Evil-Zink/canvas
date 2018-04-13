@@ -1,11 +1,14 @@
 var canvas = document.getElementById('canvas');
 var context = canvas.getContext('2d');
+
+//默认画笔粗细
 var lineWidth = 5;
 
+/*设置canvas全屏*/
 aotuCanvas(canvas);
-
+//监听用户动作
 listenToUser(canvas);
-
+//功能初始化
 var usingEraser = false;
 pen.onclick = function(){
   usingEraser = false;
@@ -23,6 +26,7 @@ eraser.onclick = function(){
   red.classList.remove('active');
   green.classList.remove('active');
   blue.classList.remove('active');
+  yellow.classList.remove('active');
 }
 clear.onclick = function(){
   context.clearRect(0, 0, canvas.width, canvas.height)
@@ -43,6 +47,7 @@ black.onclick = function(){
   black.classList.add('active');
   red.classList.remove('active');
   green.classList.remove('active');
+  yellow.classList.remove('active');
   blue.classList.remove('active');
 }
 red.onclick = function(){
@@ -51,6 +56,7 @@ red.onclick = function(){
   red.classList.add('active');
   black.classList.remove('active');
   green.classList.remove('active');
+  yellow.classList.remove('active');
   blue.classList.remove('active');
 }
 green.onclick = function(){
@@ -59,6 +65,7 @@ green.onclick = function(){
   green.classList.add('active');  
   black.classList.remove('active');
   red.classList.remove('active');
+  yellow.classList.remove('active');
   blue.classList.remove('active');
 }
 blue.onclick = function(){
@@ -67,7 +74,17 @@ blue.onclick = function(){
   blue.classList.add('active');  
   black.classList.remove('active');
   red.classList.remove('active');
+  yellow.classList.remove('active');
   green.classList.remove('active');
+}
+yellow.onclick = function(){
+  context.strokeStyle = 'yellow';
+  context.fillStyle = 'yellow';
+  yellow.classList.add('active');
+  black.classList.remove('active');
+  red.classList.remove('active');
+  green.classList.remove('active');
+  blue.classList.remove('active');
 }
 
 thin.onclick = function(){
@@ -80,10 +97,11 @@ thick.onclick = function(){
   lineWidth = 7;
 }
 
-/************/
+/******设置一个全屏的白色canvas*****/
 context.fillStyle = 'white';
 context.fillRect(0,0,canvas.width, canvas.height);
 
+/****获取视口宽高***/
 function aotuCanvas(canvas){
   changeWH();
   window.onresize = function(){
@@ -98,7 +116,7 @@ function aotuCanvas(canvas){
 }
 }
 
-
+/******监听用户移动鼠标or手指，设备特性检测******/
 function listenToUser(canvas){
   var using = false;
   var lastPoint={x:undefined, y:undefined};
