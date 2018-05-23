@@ -1,7 +1,7 @@
 var canvas = document.getElementById('canvas');
 var context = canvas.getContext('2d');
 
-//默认画笔粗细
+//默认画笔粗细，默认为5
 var lineWidth = 5;
 
 /*设置canvas全屏*/
